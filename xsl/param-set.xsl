@@ -51,7 +51,7 @@
                   </xsl:when>
                   <xsl:otherwise>
                     <xsl:attribute name="method" select="'xml'"/>
-                    <xsl:sequence select="$_map(.)/self::attribute(), $_map(.)[empty(self::attribute())]"/>    
+                    <xsl:sequence select="$_map(.)"/>    
                   </xsl:otherwise>
                 </xsl:choose>
               </xsl:when>
