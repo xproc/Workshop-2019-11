@@ -44,6 +44,9 @@
           <xsl:sort select="xs:string(.)"/>
           <c:param name="{.}">
             <xsl:choose>
+              <xsl:when test="empty($_map(.))">
+                <xsl:attribute name="empty-sequence" select="'true'"/>
+              </xsl:when>
               <xsl:when test="$_map(.) instance of xs:anyAtomicType">
                 <xsl:attribute name="value" select="$_map(.)"/>
               </xsl:when>
