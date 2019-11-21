@@ -25,8 +25,11 @@
     select="map{xs:QName('num'): 43.0,
                 xs:QName('xs:name'): 'foo', 
                 xs:QName('foo:test'): ($doc, 'f'), 
+                xs:QName('foo:test0'): ([45.7, 'g', true()], [-2, 4.3]), 
                 xs:QName('foo:test1'): [45.7, 'g', true()], 
                 xs:QName('foo:test2'): ($doc, $doc/*), 
+                xs:QName('foo:test3'): [[45.7, 'g', true()], [-2, 4.3]], 
+                xs:QName('foo:test4'): (([45.7, 'g', true()]), ([-2, 4.3])), 
                 xs:QName('bar'): map{'baz': ['a', 1]},
                 xs:QName('third'): ($doc, $doc/*/@*)}"/>
   
@@ -35,6 +38,7 @@
     <xsl:document>
       <c:param-set>
         <xsl:for-each select="map:keys($_map)">
+          <xsl:sort select="xs:string(.)"/>
           <c:param name="{.}">
             <xsl:variable name="value" select="serialize($_map(.), map{'method': 'adaptive'})"/>
             <xsl:choose>
@@ -57,7 +61,9 @@
                               $_map(.) instance of array(*)+">
                 <xsl:try>
                   <xsl:attribute name="method" select="'json-to-xml'"/>
-                  <xsl:sequence select="json-to-xml(serialize($_map(.), map{'method': 'json'}))"/>
+                  <xsl:for-each select="$_map(.)">
+                    <xsl:sequence select="json-to-xml(serialize(., map{'method': 'json'}))"/>  
+                  </xsl:for-each>
                   <xsl:catch>
                     <xsl:sequence select="xpu:adaptive($_map(.))"/>
                   </xsl:catch>
