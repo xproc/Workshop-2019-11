@@ -29,7 +29,10 @@
                 xs:QName('foo:test1'): [45.7, 'g', true()], 
                 xs:QName('foo:test2'): ($doc, $doc/*), 
                 xs:QName('foo:test3'): [[45.7, 'g', true()], [-2, 4.3]], 
-                xs:QName('foo:test4'): (([45.7, 'g', true()]), ([-2, 4.3])), 
+                xs:QName('foo:test4'): (([45.7, 'g', true()]), ([-2, 4.3])),
+                xs:QName('empty-sequence'): (),
+                xs:QName('empty-string'): '',
+                xs:QName('empty-strings'): ('', ''),
                 xs:QName('bar'): map{'baz': ['a', 1]},
                 xs:QName('third'): ($doc, $doc/*/@*)}"/>
   
