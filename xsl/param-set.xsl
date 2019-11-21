@@ -40,7 +40,6 @@
         <xsl:for-each select="map:keys($_map)">
           <xsl:sort select="xs:string(.)"/>
           <c:param name="{.}">
-            <xsl:variable name="value" select="serialize($_map(.), map{'method': 'adaptive'})"/>
             <xsl:choose>
               <xsl:when test="$_map(.) instance of xs:anyAtomicType">
                 <xsl:attribute name="value" select="$_map(.)"/>
